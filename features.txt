@@ -1,0 +1,8 @@
+reminder email
+unregister button for user to unregister from event
+permissions to officers
+confirmation email
+
+user can go and see all the events they have registered for
+
+new comminuty service added email
