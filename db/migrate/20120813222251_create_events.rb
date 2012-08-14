@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :start
       t.datetime :end
       t.integer :event_type_id
+      t.integer :semester_id
 
       t.timestamps
     end
