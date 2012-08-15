@@ -1,4 +1,26 @@
 class EventsController < ApplicationController
+  # GET /add_attendee/1
+  # GET /add_attendee/1.json
+  def add_attendee
+    gtid = params[:attendee][:gtid]
+    member = Member.where(:gtid => gtid).first
+    if !member.nil?
+      @event = Event.find(params[:id])
+      if @event.members.where(:gtid => gtid).count == 0
+        @event.members << member
+      else
+        flash[:error] = 'Member is already attending the event'
+      end
+    else
+      flash[:error] = 'GTID does not exist in DB'
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'show' }
+      format.json { render json: @events }
+    end
+  end
+
   # GET /events
   # GET /events.json
   def index
@@ -14,6 +36,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    @members = @event.members
 
     respond_to do |format|
       format.html # show.html.erb

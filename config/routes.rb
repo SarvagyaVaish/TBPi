@@ -1,7 +1,11 @@
 TBPiAttendance::Application.routes.draw do
   resources :attendances
 
-  resources :events
+  resources :events do
+    member do
+      put 'add_attendee'
+    end
+  end
 
   resources :event_types
 
