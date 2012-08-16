@@ -5,10 +5,13 @@ class MembersController < ApplicationController
     if params[:semester_id]
       @semester_to_report = params[:semester_id][:semester_id]
     elsif Semester.where('start_dt < ? and end_dt > ?', Time.now, Time.now).count > 0
+      logger.debug 'No report parameter passed *****************************'
       @semester_to_report =  Semester.where('start_dt < ? and end_dt > ?', Time.now, Time.now).first.id
     elsif Semester.all.count != 0
-      @semester_to_report =  Semester.last.id
+      logger.debug 'No report parameter passed. No semester in progress *****************************'
+      @semester_to_report =  Semester.order('end_dt DESC')[0]
     else
+      logger.debug 'No semesters exist *****************************'
       @semester_to_report = nil
       flash[:error] = "Cannot generate report! A semester has not been created."
     end
