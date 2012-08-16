@@ -1,5 +1,5 @@
 class Semester < ActiveRecord::Base
-  attr_accessible :end, :name, :start
+  attr_accessible :end_dt, :name, :start_dt
 
   has_many :events
 end

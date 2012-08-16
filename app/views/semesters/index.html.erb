@@ -7,8 +7,8 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:start) %></th>
-      <th><%= model_class.human_attribute_name(:end) %></th>
+      <th><%= model_class.human_attribute_name(:start_dt) %></th>
+      <th><%= model_class.human_attribute_name(:end_dt) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,8 +18,8 @@
       <tr>
         <td><%= link_to semester.id, semester_path(semester) %></td>
         <td><%= semester.name %></td>
-        <td><%= semester.start %></td>
-        <td><%= semester.end %></td>
+        <td><%= semester.start_dt %></td>
+        <td><%= semester.end_dt %></td>
         <td><%=l semester.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

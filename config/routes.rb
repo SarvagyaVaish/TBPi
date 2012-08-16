@@ -11,7 +11,11 @@ TBPiAttendance::Application.routes.draw do
 
   resources :semesters
 
-  resources :members
+  resources :members do
+    collection do
+      get 'report'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,4 +1,26 @@
 class MembersController < ApplicationController
+  # GET /members/report
+  # GET /members/report.json
+  def report
+    if params[:semester_id]
+      @semester_to_report = params[:semester_id][:semester_id]
+    elsif Semester.where('start_dt < ? and end_dt > ?', Time.now, Time.now).count > 0
+      @semester_to_report =  Semester.where('start_dt < ? and end_dt > ?', Time.now, Time.now).first.id
+    elsif Semester.all.count != 0
+      @semester_to_report =  Semester.last.id
+    else
+      @semester_to_report = nil
+      flash[:error] = "Cannot generate report! A semester has not been created."
+    end
+
+    logger.debug @semester_to_report
+
+    respond_to do |format|
+      format.html # report.html.erb
+      format.json { render json: @members }
+    end
+  end
+
   # GET /members
   # GET /members.json
   def index
