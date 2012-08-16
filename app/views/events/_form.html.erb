@@ -20,13 +20,13 @@
   <div class="control-group">
     <%= f.label :event_type_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :event_type_id, :class => 'number_field' %>
+      <%= f.collection_select :event_type_id, EventType.all, :id, :name, {}, { :selected => @event.event_type_id } %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :semester_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :semester_id, :class => 'number_field' %>
+      <%= f.collection_select :semester_id, Semester.all, :id, :name, {}, { :selected => @event.semester_id } %>
     </div>
   </div>
 
