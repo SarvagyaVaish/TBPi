@@ -1,9 +1,9 @@
 class Event < ActiveRecord::Base
-  attr_accessible :end, :event_type_id, :name, :semester_id, :start
+  attr_accessible :end_dt, :event_type_id, :name, :semester_id, :start_dt
 
   belongs_to :semester
   belongs_to :event_type
 
-  has_many :attendances
+  has_many :attendances, :dependent => :destroy
   has_many :members, :through => :attendances
 end
