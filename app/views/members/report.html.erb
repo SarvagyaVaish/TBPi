@@ -46,7 +46,7 @@
               <td><%= member.gtid %></td>
               <td><%= member.status %></td>
               <% EventType.all.each do |eventType| %>
-                <td><%= member.events.where(:event_type_id => eventType.id, :semester_id => @semester_to_report).count %></td>
+                <td><%= Attendance.sumOfPoints(member.id, eventType.id, @semester_to_report) %></td>
               <% end %>
               <td>
                 <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_member_path(member), :class => 'btn btn-mini' %>
