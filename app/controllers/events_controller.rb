@@ -1,6 +1,21 @@
 class EventsController < ApplicationController
   # GET /add_attendee/1
   # GET /add_attendee/1.json
+  def remove_attendee
+    member = Member.find(params[:attendee_id])
+    event = Event.find(params[:id])
+    Attendance.where(:member_id => member.id, :event_id => event.id).first.destroy
+
+    flash[:notice] = 'Attendee removed'
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'show' }
+      format.json { render json: @events }
+    end
+  end
+
+  # PUT /add_attendee/1
+  # PUT /add_attendee/1.json
   def add_attendee
     gtid = params[:attendee][:gtid]
     points = params[:attendee][:points]
