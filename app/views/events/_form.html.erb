@@ -6,6 +6,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :default_points, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :default_points, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :start_dt, :class => 'control-label' %>
     <div class="controls">
       <%= f.datetime_select :start_dt, :class => 'datetime_select' %>

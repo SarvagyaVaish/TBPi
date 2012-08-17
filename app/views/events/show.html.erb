@@ -18,8 +18,15 @@
     <%= form_for @event, :url => { :action => 'add_attendee' }, :html => { :class => 'form-horizontal' } do |f| %>
       <div class="control-group">
         <%= label_tag 'gtid', 'GTID', :class => 'control-label' %>
-        <div class="controls">       
+        <div class="controls">
           <%= text_field(:attendee, :gtid, :value => '902', :class => 'text_field') %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag 'points', 'Points', :class => 'control-label' %>
+        <div class="controls">
+          <%= text_field(:attendee, :points, :value => @event.default_points, :class => 'text_field') %>
         </div>
       </div>
 

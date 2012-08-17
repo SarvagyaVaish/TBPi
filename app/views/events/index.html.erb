@@ -7,6 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:default_points) %></th>
       <th><%= model_class.human_attribute_name(:start_dt) %></th>
       <th><%= model_class.human_attribute_name(:end_dt) %></th>
       <th><%= model_class.human_attribute_name(:event_type_id) %></th>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= link_to event.id, event_path(event) %></td>
         <td><%= event.name %></td>
+        <td><%= event.default_points %></td>
         <td><%= event.start_dt %></td>
         <td><%= event.end_dt %></td>
         <td><%= event.event_type_id %></td>

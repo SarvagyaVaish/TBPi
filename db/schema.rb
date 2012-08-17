@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816225525) do
+ActiveRecord::Schema.define(:version => 20120817014942) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "member_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120816225525) do
     t.string   "status"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "points"
   end
 
   create_table "event_types", :force => true do |t|
@@ -33,8 +34,9 @@ ActiveRecord::Schema.define(:version => 20120816225525) do
     t.datetime "end_dt"
     t.integer  "event_type_id"
     t.integer  "semester_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "default_points"
   end
 
   create_table "members", :force => true do |t|

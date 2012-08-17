@@ -3,11 +3,12 @@ class EventsController < ApplicationController
   # GET /add_attendee/1.json
   def add_attendee
     gtid = params[:attendee][:gtid]
+    points = params[:attendee][:points]
     member = Member.where(:gtid => gtid).first
     if !member.nil?
       @event = Event.find(params[:id])
       if @event.members.where(:gtid => gtid).count == 0
-        @event.members << member
+        attendance = Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'present', :points => points)
       else
         flash[:error] = 'Member is already attending the event'
       end
