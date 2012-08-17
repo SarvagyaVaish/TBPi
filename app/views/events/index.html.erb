@@ -5,28 +5,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:default_points) %></th>
-      <th><%= model_class.human_attribute_name(:start_dt) %></th>
-      <th><%= model_class.human_attribute_name(:end_dt) %></th>
+      <th>Points</th>
+      <th>Start</th>
+      <th>End</th>
       <th><%= model_class.human_attribute_name(:event_type_id) %></th>
       <th><%= model_class.human_attribute_name(:semester_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= link_to event.id, event_path(event) %></td>
-        <td><%= event.name %></td>
+        <td><%= link_to event.name, event_path(event) %></td>
         <td><%= event.default_points %></td>
         <td><%= event.start_dt %></td>
         <td><%= event.end_dt %></td>
-        <td><%= event.event_type_id %></td>
-        <td><%= event.semester_id %></td>
-        <td><%=l event.created_at %></td>
+        <td><%= EventType.find(event.event_type_id).name %></td>
+        <td><%= Semester.find(event.semester_id).name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_event_path(event), :class => 'btn btn-mini' %>

@@ -28,7 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">TBPiAttendance</a>
+          <a class="brand" href="#">TBPi</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "Link1", "/path1"  %></li>
@@ -48,9 +48,13 @@
               <li class="nav-header">Quick Links</li>
               <li><%= link_to "Members", members_path %></li>
               <ul>
+                <li><%= link_to "Add New Member", new_member_path %></li>
                 <li><%= link_to "Attendance Report", report_members_path %></li>
               </ul>
               <li><%= link_to "Events", events_path %></li>
+              <ul>
+                <li><%= link_to "Create Event", new_event_path %></li>
+              </ul>
             </ul>
             <br />
             <ul class="nav nav-list">

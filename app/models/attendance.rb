@@ -7,8 +7,8 @@ class Attendance < ActiveRecord::Base
   def self.sumOfPoints(memberId, eventTypeId, semesterId)
     points = 0
     Event.where(:semester_id => semesterId, :event_type_id => eventTypeId).each do |event|
-      if Attendance.where(:event_id => event.id, :member_id => memberId).count != 0
-        points = points + Attendance.where(:event_id => event.id, :member_id => memberId).first.points
+      if Attendance.where(:event_id => event.id, :member_id => memberId, :status => "Present").count != 0
+        points = points + Attendance.where(:event_id => event.id, :member_id => memberId, :status => "Present").first.points
       end
     end
     return points
