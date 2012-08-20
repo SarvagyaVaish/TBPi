@@ -19,7 +19,6 @@
       <div class="control-group">
         <%= label_tag 'gtid', 'GTID', :class => 'control-label' %>
         <div class="controls">
-          <% #TODO: Add autocomplete on gtid, and or name %>
           <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path %>
         </div>
       </div>
