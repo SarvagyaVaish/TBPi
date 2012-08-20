@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+  
+  autocomplete :member, :gtid
+
   # GET /add_attendee/1
   # GET /add_attendee/1.json
   def remove_attendee
