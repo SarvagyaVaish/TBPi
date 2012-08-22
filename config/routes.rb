@@ -1,4 +1,6 @@
 TBPiAttendance::Application.routes.draw do
+  resources :roles
+
   resources :attendances
 
   resources :events do
