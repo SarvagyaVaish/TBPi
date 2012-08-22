@@ -8,7 +8,7 @@
       <th>Name</th>
       <th>GTID</th>
       <th>GT Username</th>
-      <th>Status</th>
+      <th>Role</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -18,7 +18,7 @@
         <td><%= link_to "#{member.first_name} #{member.last_name}", member_path(member) %></td>
         <td><%= member.gtid %></td>
         <td><%= member.gtusername %></td>
-        <td><%= member.status %></td>
+        <td><%= member.role_id %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_member_path(member), :class => 'btn btn-mini' %>
