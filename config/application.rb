@@ -11,9 +11,6 @@ end
 
 module TBPiAttendance
   class Application < Rails::Application
-    # GT CAS login
-    config.rubycas.cas_base_url = "https://login.gatech.edu/cas/"
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

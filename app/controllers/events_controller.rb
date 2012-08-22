@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
   
   autocomplete :member, :gtid
-  before_filter RubyCAS::Filter
 
   # GET /add_attendee/1
   # GET /add_attendee/1.json
