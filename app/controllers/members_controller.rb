@@ -5,13 +5,10 @@ class MembersController < ApplicationController
     if params[:semester_id]
       @semester_to_report = params[:semester_id][:semester_id]
     elsif Semester.where('start_dt < ? and end_dt > ?', Time.now, Time.now).count > 0
-      logger.debug 'No report parameter passed *****************************'
       @semester_to_report =  Semester.where('start_dt < ? and end_dt > ?', Time.now, Time.now).first.id
     elsif Semester.all.count != 0
-      logger.debug 'No report parameter passed. No semester in progress *****************************'
       @semester_to_report =  Semester.order('end_dt DESC')[0]
     else
-      logger.debug 'No semesters exist *****************************'
       @semester_to_report = nil
       flash[:error] = "Cannot generate report! A semester has not been created."
     end
@@ -51,6 +48,10 @@ class MembersController < ApplicationController
   def new
     @member = Member.new
 
+    if params[:createAndAdd]
+      @member.gtid = params[:gtid]
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @member }
@@ -69,8 +70,14 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
-        format.json { render json: @member, status: :created, location: @member }
+        if params[:createAndAdd] == 'true'
+          Attendance.create(:member_id => @member.id, :event_id => params[:event_id], :status => 'Present', :points => params[:points])
+          redirect_to event_path(params[:event_id])
+          return
+        else
+          format.html { redirect_to @member, notice: 'Member was successfully created.' }
+          format.json { render json: @member, status: :created, location: @member }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @member.errors, status: :unprocessable_entity }

@@ -24,9 +24,14 @@
     </div>
   </div>
 
+  <% if params[:createAndAdd] == 'true' %>
+    <%= hidden_field_tag :createAndAdd, 'true' %>
+    <%= hidden_field_tag :points, params[:points] %>
+    <%= hidden_field_tag :event_id, params[:event_id] %>
+  <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                members_path, :class => 'btn' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), members_path, :class => 'btn' %>
   </div>
 <% end %>
