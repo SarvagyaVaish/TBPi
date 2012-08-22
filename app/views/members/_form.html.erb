@@ -1,20 +1,26 @@
 <%= form_for @member, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
-    <%= f.label :first_name, :class => 'control-label' %>
+    <%= f.label :first_name, 'First Name', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :first_name, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :last_name, :class => 'control-label' %>
+    <%= f.label :last_name, 'Last Name', :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :last_name, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :gtid, :class => 'control-label' %>
+    <%= f.label :gtid, "GTID", :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :gtid, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :gtusername, "GT Username", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gtusername, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
