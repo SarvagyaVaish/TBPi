@@ -11,9 +11,6 @@ end
 
 module TBPiAttendance
   class Application < Rails::Application
-
-    config.assets.initialize_on_precompile = false
-
     # GT CAS login
     config.rubycas.cas_base_url = "https://login.gatech.edu/cas/"
 
