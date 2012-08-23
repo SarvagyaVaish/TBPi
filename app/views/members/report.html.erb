@@ -44,7 +44,7 @@
             <tr>
               <td><%= link_to "#{member.first_name} #{member.last_name}", member_path(member) %></td>
               <td><%= member.gtid %></td>
-              <td><%= member.role_id %></td>
+              <td><%= Role.find(member.role_id).name %></td>
               <% EventType.all.each do |eventType| %>
                 <td><%= Attendance.sumOfPoints(member.id, eventType.id, @semester_to_report) %></td>
               <% end %>

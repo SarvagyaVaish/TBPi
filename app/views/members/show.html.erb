@@ -4,16 +4,16 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
+  <dt><strong>First Name:</strong></dt>
   <dd><%= @member.first_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
+  <dt><strong>Last Name:</strong></dt>
   <dd><%= @member.last_name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:gtid) %>:</strong></dt>
+  <dt><strong>GTID:</strong></dt>
   <dd><%= @member.gtid %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:gtusername) %>:</strong></dt>
+  <dt><strong>GT Username:</strong></dt>
   <dd><%= @member.gtusername %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:role_id) %>:</strong></dt>
-  <dd><%= @member.role_id %></dd>
+  <dt><strong>Role:</strong></dt>
+  <dd><%= Role.find(@member.role_id).name %></dd>
 </dl>
 
 <div class="form-actions">

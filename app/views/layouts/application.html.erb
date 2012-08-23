@@ -54,13 +54,15 @@
             </ul>
             <br />
             <ul class="nav nav-list">
-              <li class="nav-header">Admin</li>
+              <li class="nav-header">Admin Links</li>
+              <li><%= link_to "Roles", roles_path %></li>
               <li><%= link_to "Semesters", semesters_path %></li>
               <li><%= link_to "Event Types", event_types_path %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
+          <%= session %>
           <%= yield %>
         </div>
       </div><!--/row-->
