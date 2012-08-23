@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   
   autocomplete :member, :gtid
   # before_filter RubyCAS::Filter
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   # GET /add_attendee/1
   # GET /add_attendee/1.json
