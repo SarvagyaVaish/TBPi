@@ -1,4 +1,7 @@
 class AttendancesController < ApplicationController
+
+  load_and_authorize_resource
+
   # GET /attendances
   # GET /attendances.json
   def index

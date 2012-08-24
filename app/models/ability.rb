@@ -3,7 +3,19 @@ class Ability
 
   def initialize(user)
     user ||= Member.new # guest user (not logged in)
-    can :read, :all
+
+    can :read, Event
+    can :autocomplete_member_gtid, Event
+    can :create, Member
+
+    if user.isWebmaster?
+      can :manage, :all
+
+    elsif user.isOfficer?
+      can :read, :all
+      can :manage, [Member, Event, Semester]
+
+    end
 
     # Define abilities for the passed in user here. For example:
     #

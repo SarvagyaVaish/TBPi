@@ -1,4 +1,7 @@
 class SemestersController < ApplicationController
+
+  load_and_authorize_resource
+
   # GET /semesters
   # GET /semesters.json
   def index

@@ -42,23 +42,37 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Quick Links</li>
-              <li><%= link_to "Members", members_path %></li>
+              <li><%= link_to "Member Info", members_path %></li>
               <ul>
-                <li><%= link_to "Add New Member", new_member_path %></li>
+                <li><%= link_to "New Member", new_member_path %></li>
                 <li><%= link_to "Attendance Report", report_members_path %></li>
               </ul>
-              <li><%= link_to "Events", events_path %></li>
+              <li><%= link_to "Event", events_path %></li>
               <ul>
+                <% if Event.count > 0 %>
+                  <% #TODO change to events of the current semester only %>
+                  <% Event.all.each do |event| %>
+                    <li><%= link_to event.name, event_path(event) %></li>
+                  <% end %>
+                <% end %>
                 <li><%= link_to "Create Event", new_event_path %></li>
               </ul>
             </ul>
             <br />
-            <ul class="nav nav-list">
-              <li class="nav-header">Admin Links</li>
-              <li><%= link_to "Roles", roles_path %></li>
-              <li><%= link_to "Semesters", semesters_path %></li>
-              <li><%= link_to "Event Types", event_types_path %></li>
-            </ul>
+            <% if @current_user.isOfficer? or @current_user.isWebmaster? %>
+              <ul class="nav nav-list">
+                <li class="nav-header">Officer Links</li>
+                <% if can? :manage, Role %>
+                  <li><%= link_to "Manage Roles", roles_path %></li>
+                <% end %>
+                <% if can? :manage, Semester %>
+                  <li><%= link_to "Manage Semesters", semesters_path %></li>
+                <% end %>
+                <% if can? :manage, EventType %>
+                  <li><%= link_to "Manage Event Types", event_types_path %></li>
+                <% end %>
+              </ul>
+            <% end %>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
