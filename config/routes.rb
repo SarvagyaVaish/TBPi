@@ -1,6 +1,4 @@
 TBPiAttendance::Application.routes.draw do
-  resources :permissions
-
   resources :roles
 
   resources :attendances
