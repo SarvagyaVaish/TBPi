@@ -21,6 +21,9 @@ TBPiAttendance::Application.routes.draw do
     end
   end
 
+  match 'home/login' => 'home#login'
+  match 'home/logout' => 'home#logout'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

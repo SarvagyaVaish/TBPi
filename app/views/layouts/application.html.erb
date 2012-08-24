@@ -27,9 +27,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">TBPi</a>
+          <%= link_to "TBPi Attendance", events_path, :class => 'brand' %>
           <div class="container-fluid nav-collapse">
-            <ul class="nav">
+            <ul class="nav pull-right">
+              <li><%= link_to "Login", home_login_path %></li>
+              <li><%= link_to "Logout", home_logout_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

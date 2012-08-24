@@ -33,7 +33,7 @@ gem 'delayed_mailhopper'
 gem 'rails3-jquery-autocomplete'
 
 gem 'rubycas-client-rails'
-gem "rubycas-client", "< 2.3"
+gem 'rubycas-client', "< 2.3"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
