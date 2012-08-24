@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # before_filter RubyCAS::Filter
 
   def current_user
-    logger.debug "*******************   IN CURRENT USER METHOD    *******************"
+    CUSTOM_LOG.debug "*******************   IN CURRENT USER METHOD    *******************"
     begin
       if session[:cas_user]
         @current_user ||= Member.find_by_gtusername(session[:cas_user])
