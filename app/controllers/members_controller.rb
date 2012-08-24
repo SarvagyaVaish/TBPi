@@ -55,6 +55,10 @@ class MembersController < ApplicationController
       @member.gtid = params[:gtid]
     end
 
+    if params[:gtusername]
+      @member.gtusername = params[:gtusername]
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @member }

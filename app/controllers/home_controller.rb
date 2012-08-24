@@ -4,7 +4,8 @@ class HomeController < ApplicationController
 
   def login
     if Member.find_by_gtusername(session[:cas_user]).nil?
-      redirect_to new_member_path
+      flash[:notice] = "Welcome new user! Please fill out these details to get started"
+      redirect_to :controller => 'members', :action => 'new', :newUser => 'true', :gtusername => session[:cas_user]
       return
     end
 

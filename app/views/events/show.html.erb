@@ -3,14 +3,6 @@
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
 
-<% if flash[:error] %>
-  <%= flash[:error] %>
-<% end %>
-
-<% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
-
 <div class="row-fluid">
   <div class="span6 well">
     <h3>Add Attendee</h3>

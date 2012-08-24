@@ -61,7 +61,7 @@
               </ul>
             </ul>
             <br />
-            <% if @current_user.isOfficer? or @current_user.isWebmaster? %>
+            <% if current_user and (@current_user.isOfficer? or @current_user.isWebmaster?) %>
               <ul class="nav nav-list">
                 <li class="nav-header">Officer Links</li>
                 <% if can? :manage, Role %>
@@ -83,6 +83,14 @@
       </div><!--/row-->
 
       <br />
+      <% if flash[:error] %>
+        <%= flash[:error] %>
+      <% end %>
+
+      <% if flash[:notice] %>
+        <%= flash[:notice] %>
+      <% end %>
+
       <div class="row">
         <div class="span12 well">
           <%= session %>
