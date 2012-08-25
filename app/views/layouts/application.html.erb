@@ -78,18 +78,24 @@
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
+          <% if flash[:error] %>
+            <div class="alert">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <%= flash[:error] %>
+            </div>
+          <% end %>
+
+          <% if flash[:notice] %>
+            <div class="alert">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <%= flash[:notice] %>
+            </div>
+          <% end %>
           <%= yield %>
         </div>
       </div><!--/row-->
 
       <br />
-      <% if flash[:error] %>
-        <%= flash[:error] %>
-      <% end %>
-
-      <% if flash[:notice] %>
-        <%= flash[:notice] %>
-      <% end %>
 
       <div class="row">
         <div class="span12 well">
