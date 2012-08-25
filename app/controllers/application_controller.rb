@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   def current_user
     begin
       @current_user ||= Member.find_by_gtusername(session[:cas_user]) if session[:cas_user]
+      @current_user
     rescue
       session[:cas_user] = nil
     end

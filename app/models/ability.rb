@@ -8,6 +8,10 @@ class Ability
     can :autocomplete_member_gtid, Event
     can :create, Member
 
+    can [:report, :show, :edit, :update, :destroy], Member do |m|
+      m == user 
+    end
+
     if user.isWebmaster?
       can :manage, :all
 

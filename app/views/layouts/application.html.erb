@@ -30,8 +30,17 @@
           <%= link_to "TBPi Attendance", events_path, :class => 'brand' %>
           <div class="container-fluid nav-collapse">
             <ul class="nav pull-right">
-              <li><%= link_to "Login", home_login_path %></li>
-              <li><%= link_to "Logout", home_logout_path %></li>
+              <% if session[:cas_user] %>
+                <% @member = Member.find_by_gtusername(session[:cas_user]) %>
+                <% if @member %>
+                  <li><%= link_to @member.name, member_path(@member.id) %></li>
+                <% else %>
+                  <li><%= link_to session[:cas_user], new_member_path, :gtusername => session[:cas_user] %></li>
+                <% end %>
+                <li><%= link_to "Logout", home_logout_path %></li>
+              <% else %>
+                <li><%= link_to "Login", home_login_path %></li>
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -42,25 +51,38 @@
       <div class="row-fluid">
         <div class="span3">
           <div class="well sidebar-nav">
+
             <ul class="nav nav-list">
-              <li class="nav-header">Quick Links</li>
-              <li><%= link_to "Member Info", members_path %></li>
-              <ul>
-                <li><%= link_to "New Member", new_member_path %></li>
-                <li><%= link_to "Attendance Report", report_members_path %></li>
-              </ul>
-              <li><%= link_to "Event", events_path %></li>
-              <ul>
-                <% if Event.count > 0 %>
-                  <% #TODO change to events of the current semester only %>
-                  <% Event.all.each do |event| %>
-                    <li><%= link_to event.name, event_path(event) %></li>
-                  <% end %>
+              <!-- No user is currently logged in -->
+              <% if !session[:cas_user] %>
+                <li class="nav-header">Quick Links</li>
+                <li><%= link_to "TBPi Website", "http://www.tbpi.gatech.edu/" %></li>
+                <li><%= link_to "Login to Attendance App", home_login_path %></li>
+                <li><%= link_to "Events", events_path %></li>
+              <% end %>
+
+              <!-- User is currently logged in but NOT registered -->
+              <% if session[:cas_user] %>
+                <% @member = Member.find_by_gtusername(session[:cas_user]) %>
+                <% if !@member %>
+                  <li class="nav-header">Quick Links</li>
+                  <li><%= link_to "TBPi Website", "http://www.tbpi.gatech.edu/" %></li>
+                  <li><%= link_to "Logout", home_logout_path %></li>
+                  <li><%= link_to "Events", events_path %></li>
+
+                  <!-- User is currently logged in and registered -->
+                <% else %>
+                  <li class="nav-header">Quick Links</li>
+                  <li><%= link_to "TBPi Website", "http://www.tbpi.gatech.edu/" %></li>
+                  <li><%= link_to "Logout", home_logout_path %></li>
+                  <li><%= link_to "My Profile", member_path(@member.id) %></li>
+                  <li><%= link_to "Events", events_path %></li>
                 <% end %>
-                <li><%= link_to "Create Event", new_event_path %></li>
-              </ul>
+              <% end %>
             </ul>
+
             <br />
+
             <% if current_user and (@current_user.isOfficer? or @current_user.isWebmaster?) %>
               <ul class="nav nav-list">
                 <li class="nav-header">Officer Links</li>
@@ -75,6 +97,7 @@
                 <% end %>
               </ul>
             <% end %>
+
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
@@ -94,18 +117,6 @@
           <%= yield %>
         </div>
       </div><!--/row-->
-
-      <br />
-
-      <div class="row">
-        <div class="span12 well">
-          <%= session %>
-        </div>
-      </div><!--/row-->
-
-      <footer>
-      <p>&copy; Company 2012</p>
-      </footer>
 
     </div> <!-- /container -->
 

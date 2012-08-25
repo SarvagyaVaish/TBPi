@@ -26,7 +26,7 @@
         <td><%= event.end_dt %></td>
         <td><%= EventType.find(event.event_type_id).name %></td>
         <td><%= Semester.find(event.semester_id).name %></td>
-        <% if can? :edit, Event %>
+        <% if can? :manage, Event %>
           <td>
             <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(event), :class => 'btn btn-mini' %>
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")), event_path(event), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger' %>
@@ -37,6 +37,6 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-  new_event_path,
-  :class => 'btn btn-primary' %>
+<% if can? :manage, Event %>
+  <%= link_to t('.new', :default => t("helpers.links.new")), new_event_path, :class => 'btn btn-primary' %>
+<% end %>
