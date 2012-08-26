@@ -8,3 +8,9 @@ en:
     links:
       destroy: "Delete"
       back: "Back to List"
+
+  time:
+    formats:
+      full: "%A, %B %e - %I:%M %P"
+      rfc822: "%e %b %Y"
+      time: "%H:%M"
