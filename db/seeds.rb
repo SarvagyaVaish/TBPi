@@ -11,8 +11,6 @@ Role.create(:name => 'Active Member')
 Role.create(:name => 'Candidate')
 Role.create(:name => 'Officer')
 Role.create(:name => 'Webmaster')
-Role.create(:name => 'Inactive member')
-Role.create(:name => 'Alumnus')
 
 EventType.create(:name => "Meeting")
 EventType.create(:name => "Social")

@@ -11,7 +11,6 @@
         <th>Date</th>
         <th>Time</th>
         <th>Event Type</th>
-        <th>Semester</th>
         <% if can? :edit, Event %>
           <th><%=t '.actions', :default => t("helpers.actions") %></th>
         <% end %>
@@ -25,7 +24,6 @@
           <td><%= l event.start_dt, :format => :rfc822 %></td>
           <td><%= l event.start_dt, :format => :time %> to <%= l event.end_dt, :format => :time %></td>
           <td><%= EventType.find(event.event_type_id).name %></td>
-          <td><%= Semester.find(event.semester_id).name %></td>
           <% if can? :manage, Event %>
             <td>
               <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_event_path(event), :class => 'btn btn-mini' %>
