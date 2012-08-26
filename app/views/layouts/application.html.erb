@@ -39,7 +39,7 @@
                 <% end %>
                 <li><%= link_to "Logout", home_logout_path %></li>
               <% else %>
-                <li><%= link_to "Login", home_login_path %></li>
+                <li><%= link_to "Login using CAS", home_login_path %></li>
               <% end %>
             </ul>
           </div><!--/.nav-collapse -->
@@ -57,7 +57,7 @@
               <% if !session[:cas_user] %>
                 <li class="nav-header">Quick Links</li>
                 <li><%= link_to "TBPi Website", "http://www.tbpi.gatech.edu/" %></li>
-                <li><%= link_to "Login to Attendance App", home_login_path %></li>
+                <li><%= link_to "Login using CAS", home_login_path %></li>
                 <li><%= link_to "Events", events_path %></li>
               <% end %>
 
@@ -67,16 +67,16 @@
                 <% if !@member %>
                   <li class="nav-header">Quick Links</li>
                   <li><%= link_to "TBPi Website", "http://www.tbpi.gatech.edu/" %></li>
-                  <li><%= link_to "Logout", home_logout_path %></li>
                   <li><%= link_to "Events", events_path %></li>
+                  <li><%= link_to "Logout", home_logout_path %></li>
 
                   <!-- User is currently logged in and registered -->
                 <% else %>
                   <li class="nav-header">Quick Links</li>
                   <li><%= link_to "TBPi Website", "http://www.tbpi.gatech.edu/" %></li>
-                  <li><%= link_to "Logout", home_logout_path %></li>
-                  <li><%= link_to "My Profile", member_path(@member.id) %></li>
                   <li><%= link_to "Events", events_path %></li>
+                  <li><%= link_to "My Profile", member_path(@member.id) %></li>
+                  <li><%= link_to "Logout", home_logout_path %></li>
                 <% end %>
               <% end %>
             </ul>
@@ -86,6 +86,9 @@
             <% if current_user and (@current_user.isOfficer? or @current_user.isWebmaster?) %>
               <ul class="nav nav-list">
                 <li class="nav-header">Officer Links</li>
+                <% if can? :manage, Member %>
+                  <li><%= link_to "Manage Members", members_path %></li>
+                <% end %>
                 <% if can? :manage, Role %>
                   <li><%= link_to "Manage Roles", roles_path %></li>
                 <% end %>

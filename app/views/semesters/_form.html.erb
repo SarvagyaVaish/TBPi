@@ -1,4 +1,11 @@
-<%= form_for @semester, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @semester, :html => { :class => 'form-horizontal' } do |f| %>  
+
+  <% @semester.errors.full_messages.each do |msg| %>
+    <div class="alert">
+      <%= msg %>  
+    </div>            
+  <% end %>             
+
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
@@ -21,6 +28,6 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                semesters_path, :class => 'btn' %>
-  </div>
-<% end %>
+      semesters_path, :class => 'btn' %>
+    </div>
+  <% end %>

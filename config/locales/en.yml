@@ -3,3 +3,8 @@
 
 en:
   hello: "Hello world"
+
+  helpers:
+    links:
+      destroy: "Delete"
+      back: "Back to List"
