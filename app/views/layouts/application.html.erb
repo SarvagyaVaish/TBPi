@@ -86,6 +86,9 @@
             <% if current_user and (@current_user.isOfficer? or @current_user.isWebmaster?) %>
               <ul class="nav nav-list">
                 <li class="nav-header">Officer Links</li>
+                <% if can? :report, Member %>
+                  <li><%= link_to "View Attendance Report", report_members_path %></li>
+                <% end %>
                 <% if can? :manage, Member %>
                   <li><%= link_to "Manage Members", members_path %></li>
                 <% end %>

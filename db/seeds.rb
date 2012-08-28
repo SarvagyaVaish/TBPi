@@ -15,3 +15,5 @@ Role.create(:name => 'Webmaster')
 EventType.create(:name => "Meeting")
 EventType.create(:name => "Social")
 EventType.create(:name => "Community Service")
+
+Semester.create(:name => "Fall 2012", :start_dt => Time.local(2012, 8, 20), :end_dt => Time.local(2012, 12, 7))
