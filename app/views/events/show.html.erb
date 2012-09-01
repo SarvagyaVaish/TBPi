@@ -1,6 +1,6 @@
 <%- model_class = Event -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+  <h1><%= @event.name %></h1>
 </div>
 
 <% if can? :manage, Event %>
@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div class="control-group">
+        <div class="control-group" style="display:none">
           <%= label_tag 'points', 'Points', :class => 'control-label' %>
           <div class="controls">
             <%= text_field(:attendee, :points, :value => @event.default_points, :class => 'text_field') %>
