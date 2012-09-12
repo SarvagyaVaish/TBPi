@@ -33,7 +33,7 @@
   <div class="control-group">
     <%= f.label :role_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.collection_select :role_id, Role.all, :id, :name, {}, { :selected => @member.role_id } %>
+      <%= f.collection_select :role_id, Role.all.reject {|r| r.id == 4}, :id, :name, {}, { :selected => @member.role_id } %>
     </div>
   </div>
 
