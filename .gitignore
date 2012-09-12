@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore password files. These passwords have been added directly to heroku as config-vars (https://devcenter.heroku.com/articles/config-vars).
+/config/initializers/passwords.rb
