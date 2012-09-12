@@ -16,6 +16,9 @@
           </div>
         </div>
 
+
+        <%= text_field(:attendee, :points, :value => @event.default_points, :class => 'text_field', :type => 'hidden') %>
+
         <!--
         <div class="control-group">
           <%= label_tag 'points', 'Points', :class => 'control-label' %>
