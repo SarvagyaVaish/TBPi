@@ -21,7 +21,8 @@ TBPiAttendance::Application.routes.draw do
     end
   end
 
-  match 'home/login' => 'home#login'
+  match 'home/login_with_CAS' => 'home#login_with_CAS'
+  match 'auth/:provider/callback', to: 'home#login_with_google'
   match 'home/logout' => 'home#logout'
 
   # The priority is based upon order of creation:

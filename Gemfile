@@ -22,6 +22,8 @@ group :assets do
   gem 'twitter-bootstrap-rails'
 end
 
+gem 'omniauth-google-oauth2'
+
 gem 'jquery-rails'
 
 gem 'cancan'
