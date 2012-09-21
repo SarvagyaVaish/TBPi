@@ -7,6 +7,9 @@ class Member < ActiveRecord::Base
   validates :role_id, :presence => true
   validates :gtusername, :presence => true
 
+  validates_uniqueness_of :gtid
+  validates_uniqueness_of :gtusername
+
   has_many :attendances, :dependent => :destroy
   has_many :events, :through => :attendances
   belongs_to :role

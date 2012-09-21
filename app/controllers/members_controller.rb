@@ -27,7 +27,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = Member.order(sort_column)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -118,5 +118,10 @@ class MembersController < ApplicationController
       format.html { redirect_to members_url }
       format.json { head :no_content }
     end
+  end
+
+  private 
+  def sort_column
+    params["sort"] || "first_name"    
   end
 end

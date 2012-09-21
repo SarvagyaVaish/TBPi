@@ -50,7 +50,6 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>GTID</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
@@ -59,9 +58,8 @@
                 <% @members.each do |member| %>
                   <tr>
                     <td><%= link_to "#{member.first_name} #{member.last_name}", member_path(member) %></td>
-                    <td><%= member.gtid %></td>
                     <td><%= Attendance.where(:member_id => member.id, :event_id => @event.id).first.status %></td>
-                    <td><%= link_to "Remove", remove_attendee_event_path(:attendee_id => member.id), :class => 'btn btn-small' %></td>
+                    <td><%= link_to "Remove", remove_attendee_event_path(:attendee_id => member.id), :confirm => 'Are you sure?', :class => 'btn btn-small' %></td>
                   </tr>
                 <% end %>
               </tbody>
