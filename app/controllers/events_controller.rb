@@ -29,6 +29,7 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       if @event.members.where(:gtid => gtid).count == 0
         Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Present', :points => points)
+        flash[:error] = "#{Member.find(member.id).first_name} has been added to the event!"
       else
         flash[:error] = 'Member is already attending the event'
       end
