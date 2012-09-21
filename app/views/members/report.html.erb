@@ -31,27 +31,20 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>GTID</th>
             <th>Status</th>
             <% EventType.all.each do |eventType| %>
               <th><%= eventType.name %></th>
             <% end %>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% Member.all.each do |member| %>
+          <% Member.order("first_name").all.each do |member| %>
             <tr>
               <td><%= link_to "#{member.first_name} #{member.last_name}", member_path(member) %></td>
-              <td><%= member.gtid %></td>
               <td><%= Role.find(member.role_id).name %></td>
               <% EventType.all.each do |eventType| %>
                 <td><%= Attendance.sumOfPoints(member.id, eventType.id, @semester_to_report) %></td>
               <% end %>
-              <td>
-                <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_member_path(member), :class => 'btn btn-mini' %>
-                <%= link_to t('.destroy', :default => t("helpers.links.destroy")), member_path(member), :method => :delete, :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-mini btn-danger' %>
-              </td>
             </tr>
           <% end %>
         </tbody>
