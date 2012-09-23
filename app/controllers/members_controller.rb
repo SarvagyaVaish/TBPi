@@ -78,7 +78,7 @@ class MembersController < ApplicationController
     respond_to do |format|
       if @member.save
         if params[:createAndAdd] == 'true'
-          Attendance.create(:member_id => @member.id, :event_id => params[:event_id], :status => 'Present', :points => params[:points])
+          Attendance.create(:member_id => @member.id, :event_id => params[:event_id], :status => 'Present', :points => 1)
           redirect_to event_path(params[:event_id])
           return
         else

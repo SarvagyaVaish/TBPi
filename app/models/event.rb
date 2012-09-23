@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :end_dt, :event_type_id, :name, :semester_id, :start_dt, :default_points
+  attr_accessible :end_dt, :event_type_id, :name, :semester_id, :start_dt, :default_points, :registerable
 
   validates :semester_id, :presence => true
   validates :default_points, :presence => true

@@ -19,22 +19,46 @@ class EventsController < ApplicationController
     end
   end
 
-  # PUT /add_attendee/1
-  # PUT /add_attendee/1.json
-  def add_attendee
+  # PUT /register_attendee/1
+  # PUT /register_attendee/1.json
+  def register_attendee
     gtid = params[:attendee][:gtid]
-    points = params[:attendee][:points]
     member = Member.where(:gtid => gtid).first
     if !member.nil?
       @event = Event.find(params[:id])
       if @event.members.where(:gtid => gtid).count == 0
-        Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Present', :points => points)
+        Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Present', :points => 1)
         flash[:error] = "#{Member.find(member.id).first_name} has been added to the event!"
       else
         flash[:error] = 'Member is already attending the event'
       end
     else
-      redirect_to :controller => 'members', :action => 'new', :gtid => gtid, :event_id => params[:id], :points => points, :createAndAdd => true
+      redirect_to :controller => 'members', :action => 'new', :gtid => gtid, :event_id => params[:id], :createAndAdd => true
+      return
+      flash[:error] = 'GTID does not exist in DB'
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'show' }
+      format.json { render json: @events }
+    end
+  end
+
+  # PUT /add_attendee/1
+  # PUT /add_attendee/1.json
+  def add_attendee
+    gtid = params[:attendee][:gtid]
+    member = Member.where(:gtid => gtid).first
+    if !member.nil?
+      @event = Event.find(params[:id])
+      if @event.members.where(:gtid => gtid).count == 0
+        Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Present', :points => 1)
+        flash[:error] = "#{Member.find(member.id).first_name} has been added to the event!"
+      else
+        flash[:error] = 'Member is already attending the event'
+      end
+    else
+      redirect_to :controller => 'members', :action => 'new', :gtid => gtid, :event_id => params[:id], :createAndAdd => true
       return
       flash[:error] = 'GTID does not exist in DB'
     end

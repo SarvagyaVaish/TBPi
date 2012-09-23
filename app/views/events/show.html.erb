@@ -3,6 +3,28 @@
   <h1><%= @event.name %></h1>
 </div>
 
+<% if current_user && @event.registerable%>
+  <div class="row-fluid">
+    <div class="span12 well">
+      <h3>Register</h3>
+
+      <%= form_for @event, :url => { :action => 'register_attendee' }, :html => { :class => 'form-horizontal' } do |f| %>
+        <div class="control-group">
+          <%= label_tag 'gtid', 'GTID', :class => 'control-label' %>
+          <div class="controls">
+            <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path %>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= button_tag 'Register', :type => 'submit', :class => 'btn btn-primary' %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
+
 <% if can? :manage, Event and Time.now - @event.end_dt < 3600%>
   <div class="row-fluid">
     <div class="span12 well">
@@ -15,18 +37,6 @@
             <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path %>
           </div>
         </div>
-
-
-        <%= text_field(:attendee, :points, :value => @event.default_points, :class => 'text_field', :type => 'hidden') %>
-
-        <!--
-        <div class="control-group">
-          <%= label_tag 'points', 'Points', :class => 'control-label' %>
-          <div class="controls">
-            <%= text_field(:attendee, :points, :value => @event.default_points, :class => 'text_field') %>
-          </div>
-        </div>
-        -->
 
         <div class="form-actions">
           <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>

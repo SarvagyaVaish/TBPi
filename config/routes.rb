@@ -5,6 +5,7 @@ TBPiAttendance::Application.routes.draw do
 
   resources :events do
     member do
+      put 'register_attendee'
       put 'add_attendee'
       get 'remove_attendee'
     end

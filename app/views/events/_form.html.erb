@@ -13,6 +13,12 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label "Allow members to register?", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :registerable, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label "Start Date Time", :class => 'control-label' %>
     <div class="controls">
       <%= f.datetime_select :start_dt, :class => 'datetime_select' %>
