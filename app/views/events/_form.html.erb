@@ -13,12 +13,6 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :default_points, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :default_points, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
     <%= f.label "Start Date Time", :class => 'control-label' %>
     <div class="controls">
       <%= f.datetime_select :start_dt, :class => 'datetime_select' %>
@@ -42,6 +36,8 @@
       <%= f.collection_select :semester_id, Semester.all, :id, :name, {}, { :selected => @event.semester_id } %>
     </div>
   </div>
+
+  <%= f.text_field :default_points, :class => 'text_field', :type => 'hidden', :value => 1 %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
