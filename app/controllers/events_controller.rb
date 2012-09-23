@@ -4,8 +4,42 @@ class EventsController < ApplicationController
   # before_filter RubyCAS::Filter
   load_and_authorize_resource
 
-  # GET /add_attendee/1
-  # GET /add_attendee/1.json
+  # GET /mark_registered/1
+  # GET /mark_registered/1.json
+  def mark_registered
+    member = Member.find(params[:attendee_id])
+    event = Event.find(params[:id])
+    a = Attendance.where(:member_id => member.id, :event_id => event.id).first
+    a.status = "Registered"
+    a.save
+
+    flash[:notice] = 'Attendee removed'
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'show' }
+      format.json { render json: @events }
+    end
+  end
+
+  # GET /mark_present/1
+  # GET /mark_present/1.json
+  def mark_present
+    member = Member.find(params[:attendee_id])
+    event = Event.find(params[:id])
+    a = Attendance.where(:member_id => member.id, :event_id => event.id).first
+    a.status = "Present"
+    a.save
+
+    flash[:notice] = 'Attendee removed'
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'show' }
+      format.json { render json: @events }
+    end
+  end
+
+  # GET /remove_attendee/1
+  # GET /remove_attendee/1.json
   def remove_attendee
     member = Member.find(params[:attendee_id])
     event = Event.find(params[:id])

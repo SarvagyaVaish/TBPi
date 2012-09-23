@@ -4,7 +4,7 @@
 </div>
 
 <!-- Register upto 30 mins after the event has started -->
-<% if current_user and Time.now.between?(@event.created_at, @event.start_dt+1800) %>
+<% if @event.registerable and current_user and Time.now.between?(@event.created_at, @event.start_dt+1800) %>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Register</h3>
@@ -53,7 +53,8 @@
   </div>
 <% end %>
 
-<% if current_user %>
+<!-- Display attendees if its a non-registarable event -->
+<% if current_user and !@event.registerable %>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Attendees</h3>
@@ -87,6 +88,69 @@
         <br />
         <h5>There are currently no attendees</h5>
       <% end %>
+    </div>
+  </div>
+<% end %>
+
+<!-- Display registered and present members for registerable events -->
+<% if current_user and @event.registerable %>
+  <div class="row-fluid">
+    <div class="span12 well">
+      <div class="row-fluid">
+        <div class="span6">
+          <h3>Registered Members</h3>
+
+          <% if @event.registered_members.count != 0 %>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @event.registered_members.each do |member| %>
+                  <tr>
+                    <td><%= link_to "#{member.first_name} #{member.last_name}", member_path(member) %></td>
+                    <td><%= link_to "Present", mark_present_event_path(:attendee_id => member.id), :class => 'btn btn-small' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+          <% else %>
+            <br />
+            <h5>There are no registered members</h5>
+          <% end %>
+        </div>
+
+        <div class="span6">
+          <h3>Present</h3>
+
+          <% if @event.present_members.count != 0 %>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @event.present_members.each do |member| %>
+                  <tr>
+                    <td><%= link_to "#{member.first_name} #{member.last_name}", member_path(member) %></td>
+                    <td><%= link_to "Absent", mark_registered_event_path(:attendee_id => member.id), :confirm => 'Are you sure?', :class => 'btn btn-small' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+          <% else %>
+            <br />
+            <h5>There are no registered members</h5>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

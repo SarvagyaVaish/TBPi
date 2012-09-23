@@ -11,10 +11,19 @@ class Event < ActiveRecord::Base
   has_many :members, :through => :attendances
 
   def registered_members
-    Attendance.where(:event_id => id, :status => "Registered")
+    members = []
+    Attendance.where(:event_id => id, :status => "Registered").each do |a|
+      members << Member.find(a.member_id)
+    end
+    members
   end
 
   def present_members
-    Attendance.where(:event_id => id, :status => "Registered")
+    members = []
+    Attendance.where(:event_id => id, :status => "Present").each do |a|
+      members << Member.find(a.member_id)
+    end
+    members
   end
+
 end
