@@ -3,7 +3,7 @@
   <h1><%= @event.name %></h1>
 </div>
 
-<% if can? :manage, Event %>
+<% if can? :manage, Event and Time.now - @event.end_dt < 3600%>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Add Attendee</h3>
