@@ -7,7 +7,6 @@
     <thead>
       <tr>
         <th><%= model_class.human_attribute_name(:name) %></th>
-        <th>Hours</th>
         <th>Date</th>
         <th>Time</th>
         <th>Event Type</th>
@@ -20,7 +19,6 @@
       <% @events.each do |event| %>
         <tr>
           <td><%= link_to event.name, event_path(event) %></td>
-          <td><%= event.default_points %></td>
           <td><%= l event.start_dt, :format => :rfc822 %></td>
           <td><%= l event.start_dt, :format => :time %> to <%= l event.end_dt, :format => :time %></td>
           <td><%= EventType.find(event.event_type_id).name %></td>

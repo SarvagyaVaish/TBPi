@@ -27,14 +27,12 @@ class EventsController < ApplicationController
     if !member.nil?
       @event = Event.find(params[:id])
       if @event.members.where(:gtid => gtid).count == 0
-        Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Present', :points => 1)
+        Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Registered', :points => 1)
         flash[:error] = "#{Member.find(member.id).first_name} has been added to the event!"
       else
-        flash[:error] = 'Member is already attending the event'
+        flash[:error] = "#{Member.find(member.id).first_name} is already registered for the event"
       end
     else
-      redirect_to :controller => 'members', :action => 'new', :gtid => gtid, :event_id => params[:id], :createAndAdd => true
-      return
       flash[:error] = 'GTID does not exist in DB'
     end
 
@@ -55,7 +53,7 @@ class EventsController < ApplicationController
         Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Present', :points => 1)
         flash[:error] = "#{Member.find(member.id).first_name} has been added to the event!"
       else
-        flash[:error] = 'Member is already attending the event'
+        flash[:error] = "#{Member.find(member.id).first_name} is already attending the event"
       end
     else
       redirect_to :controller => 'members', :action => 'new', :gtid => gtid, :event_id => params[:id], :createAndAdd => true

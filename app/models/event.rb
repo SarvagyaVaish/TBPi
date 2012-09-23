@@ -9,4 +9,12 @@ class Event < ActiveRecord::Base
 
   has_many :attendances, :dependent => :destroy
   has_many :members, :through => :attendances
+
+  def registered_members
+    Attendance.where(:event_id => id, :status => "Registered")
+  end
+
+  def present_members
+    Attendance.where(:event_id => id, :status => "Registered")
+  end
 end

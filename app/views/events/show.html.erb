@@ -3,21 +3,24 @@
   <h1><%= @event.name %></h1>
 </div>
 
-<% if current_user && @event.registerable%>
+<!-- Register upto 30 mins after the event has started -->
+<% if current_user and Time.now.between?(@event.created_at, @event.start_dt+1800) %>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Register</h3>
 
-      <%= form_for @event, :url => { :action => 'register_attendee' }, :html => { :class => 'form-horizontal' } do |f| %>
-        <div class="control-group">
-          <%= label_tag 'gtid', 'GTID', :class => 'control-label' %>
-          <div class="controls">
+      <%= form_for @event, :url => { :action => 'register_attendee' } do |f| %>
+        <hr />
+        <div class="row-fluid">
+          <div class="span2">
+            <%= label_tag 'gtid', 'GTID' %>
+          </div>
+          <div class="span4">
             <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path %>
           </div>
-        </div>
-
-        <div class="form-actions">
-          <%= button_tag 'Register', :type => 'submit', :class => 'btn btn-primary' %>
+          <div class="span2">
+            <%= button_tag 'Register', :type => 'submit', :class => 'btn btn-primary' %>
+          </div>
         </div>
       <% end %>
 
@@ -25,21 +28,24 @@
   </div>
 <% end %>
 
-<% if can? :manage, Event and Time.now - @event.end_dt < 3600%>
+<!-- Take attendance starting 60 mins before and till 60 mins after -->
+<% if can? :manage, Event and Time.now.between?(@event.start_dt-3600, @event.end_dt+3600) %>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Add Attendee</h3>
 
-      <%= form_for @event, :url => { :action => 'add_attendee' }, :html => { :class => 'form-horizontal' } do |f| %>
-        <div class="control-group">
-          <%= label_tag 'gtid', 'GTID', :class => 'control-label' %>
-          <div class="controls">
-            <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path %>
+      <%= form_for @event, :url => { :action => 'add_attendee' } do |f| %>
+        <hr />
+        <div class="row-fluid">
+          <div class="span2">
+            <%= label_tag 'gtid', 'GTID' %>
           </div>
-        </div>
-
-        <div class="form-actions">
-          <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>
+          <div class="span4">
+            <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path, :autofocus => true %>
+          </div>
+          <div class="span2">
+            <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>
+          </div>
         </div>
       <% end %>
 
