@@ -13,7 +13,7 @@ class EventsController < ApplicationController
     a.status = "Registered"
     a.save
 
-    flash[:notice] = 'Attendee removed'
+    flash[:notice] = "#{Member.find(member.id).first_name} switched back to registered list"
 
     respond_to do |format|
       format.html { redirect_to :action => 'show' }
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
     a.status = "Present"
     a.save
 
-    flash[:notice] = 'Attendee removed'
+    flash[:notice] = "#{Member.find(member.id).first_name} marked present"
 
     respond_to do |format|
       format.html { redirect_to :action => 'show' }
@@ -62,7 +62,7 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       if @event.members.where(:gtid => gtid).count == 0
         Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Registered', :points => 1)
-        flash[:error] = "#{Member.find(member.id).first_name} has been added to the event!"
+        flash[:error] = "#{Member.find(member.id).first_name} is now registered for the event!"
       else
         flash[:error] = "#{Member.find(member.id).first_name} is already registered for the event"
       end
