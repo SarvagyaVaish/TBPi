@@ -30,10 +30,14 @@
           <%= link_to "TBPi Attendance", events_path, :class => 'brand' %>
           <div class="container-fluid nav-collapse">
             <ul class="nav pull-right">
+              <li class="visible-phone"><%= link_to "Events", events_path %></li>
+              <% if can? :report, Member %>
+                <li class="visible-phone"><%= link_to "View Attendance Report", report_members_path %></li>
+              <% end %>
               <% if session[:cas_user] %>
                 <% @member = Member.find_by_gtusername(session[:cas_user]) %>
                 <% if @member %>
-                  <li><%= link_to @member.name, member_path(@member.id) %></li>
+                  <li><%= link_to "My Profile", member_path(@member.id) %></li>
                 <% else %>
                   <li><%= link_to session[:cas_user], new_member_path, :gtusername => session[:cas_user] %></li>
                 <% end %>
@@ -50,7 +54,7 @@
 
     <div class="container">
       <div class="row-fluid">
-        <div class="span3">
+        <div class="span3 hidden-phone">
           <div class="well sidebar-nav">
 
             <ul class="nav nav-list">
