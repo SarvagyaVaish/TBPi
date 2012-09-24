@@ -7,7 +7,8 @@ TBPiAttendance::Application.routes.draw do
     member do
       get 'mark_present'
       get 'mark_registered'
-      put 'register_attendee'
+      get 'register_attendee'
+      get 'unregister_attendee'
       put 'add_attendee'
       get 'remove_attendee'
     end

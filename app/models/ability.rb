@@ -10,6 +10,7 @@ class Ability
 
     if !user.gtid.nil?
       can :report, Member
+      can [:register_attendee, :unregister_attendee], Event
     end
 
     can [:show, :edit, :update, :destroy], Member do |m|

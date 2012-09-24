@@ -34,4 +34,9 @@ class Member < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def is_registered_for(event_id)
+    return true if Attendance.where(:event_id => event_id, :member_id => id).count  != 0
+    return false
+  end
+
 end

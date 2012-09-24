@@ -53,18 +53,40 @@ class EventsController < ApplicationController
     end
   end
 
-  # PUT /register_attendee/1
-  # PUT /register_attendee/1.json
+  # GET /register_attendee/1
+  # GET /register_attendee/1.json
   def register_attendee
-    gtid = params[:attendee][:gtid]
-    member = Member.where(:gtid => gtid).first
+    member = Member.find(params[:attendee_id])
     if !member.nil?
       @event = Event.find(params[:id])
-      if @event.members.where(:gtid => gtid).count == 0
+      if @event.members.where(:id => member.id).count == 0
         Attendance.create(:member_id => member.id, :event_id => params[:id], :status => 'Registered', :points => 1)
         flash[:error] = "#{Member.find(member.id).first_name} is now registered for the event!"
       else
         flash[:error] = "#{Member.find(member.id).first_name} is already registered for the event"
+      end
+    else
+      flash[:error] = 'GTID does not exist in DB'
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :action => 'show' }
+      format.json { render json: @events }
+    end
+  end
+
+  # GET /unregister_attendee/1
+  # GET /unregister_attendee/1.json
+  def unregister_attendee
+    member = Member.find(params[:attendee_id])
+    if !member.nil?
+      @event = Event.find(params[:id])
+      attendance_record = Attendance.where(:event_id => @event.id, :member_id => member.id).first
+      if !attendance_record.nil?
+        attendance_record.destroy
+        flash[:error] = "#{Member.find(member.id).first_name} is no longer registered for the event!"
+      else
+        flash[:error] = "#{Member.find(member.id).first_name} was not registered for the event"
       end
     else
       flash[:error] = 'GTID does not exist in DB'

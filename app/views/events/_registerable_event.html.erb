@@ -2,21 +2,17 @@
 <% if current_user and Time.now.between?(@event.created_at, @event.start_dt+1800) %>
   <div class="row-fluid">
     <div class="span12 well">
-      <h3>Register</h3>
 
-      <%= form_for @event, :url => { :action => 'register_attendee' } do |f| %>
-        <hr />
-        <div class="row-fluid">
-          <div class="span2">
-            <%= label_tag 'gtid', 'GTID' %>
-          </div>
-          <div class="span4">
-            <%= autocomplete_field_tag 'attendee[gtid]', '', autocomplete_member_gtid_events_path %>
-          </div>
-          <div class="span2">
-            <%= button_tag 'Register', :type => 'submit', :class => 'btn btn-primary' %>
-          </div>
-        </div>
+      <% if !current_user.is_registered_for(@event.id) %>
+        <h3>
+          Register for the event? 
+          <%= link_to "YES", register_attendee_event_path(:attendee_id => current_user.id), :class => 'btn btn-success' %>
+        </h3>
+      <% else %>
+        <h4>
+          You are registered for this event. 
+          <%= link_to "Unregister here", unregister_attendee_event_path(:attendee_id => current_user.id), :confirm => "are you sure?", :class => 'btn btn-danger' %>
+        </h4>
       <% end %>
 
     </div>
@@ -78,7 +74,7 @@
 
           <% else %>
             <br />
-            <h5>There are no registered members</h5>
+            <h5>There are no members present</h5>
           <% end %>
         </div>
       </div>
