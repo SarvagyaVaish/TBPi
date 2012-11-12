@@ -1,5 +1,5 @@
 <!-- Take attendance starting 60 mins before and till 60 mins after -->
-<% if can? :manage, Event and Time.now.between?(@event.start_dt-3600, @event.end_dt+3600) %>
+<% if can? :manage, Event and (Time.now.between?(@event.start_dt-3600, @event.end_dt+3600) or current_user.isWebmaster?) %>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Add Attendee</h3>
