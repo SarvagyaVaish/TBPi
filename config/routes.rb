@@ -13,6 +13,7 @@ TBPiAttendance::Application.routes.draw do
       get 'remove_attendee'
     end
     get :autocomplete_member_gtid, :on => :collection
+    get :autocomplete_member_first_name, :on => :collection
   end
 
   resources :event_types

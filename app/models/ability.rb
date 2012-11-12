@@ -6,6 +6,7 @@ class Ability
 
     can :read, Event
     can :autocomplete_member_gtid, Event
+    can :autocomplete_member_first_name, Event
     can :create, Member
 
     if !user.gtid.nil?
