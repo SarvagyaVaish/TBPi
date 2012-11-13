@@ -22,10 +22,7 @@
             <%= label_tag 'name', 'Name' %>
           </div>
           <div class="span4">
-            <%= autocomplete_field_tag 'attendee[first_name]', '', autocomplete_member_first_name_events_path %>
-          </div>
-          <div class="span2">
-            <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>
+            <%= autocomplete_field_tag 'attendee[name]', '', autocomplete_member_first_name_events_path, :id_element => '#attendee_gtid', :update_elements => {:gtid => '#attendee_gtid'} %>
           </div>
         </div>
       <% end %>
