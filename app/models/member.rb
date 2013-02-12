@@ -30,6 +30,10 @@ class Member < ActiveRecord::Base
     return false
   end
 
+  def fullName
+    Member.find(self.id).name
+  end
+
   def name
     "#{first_name} #{last_name}"
   end

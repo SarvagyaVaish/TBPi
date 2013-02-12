@@ -1,5 +1,5 @@
 <!-- Take attendance starting 60 mins before and till 60 mins after -->
-<% if can? :manage, Event and Time.now.between?(@event.start_dt-3600, @event.end_dt+3600) %>
+<% if can? :manage, Event and (Time.now.between?(@event.start_dt-3600, @event.end_dt+3600) or current_user.isWebmaster?) %>
   <div class="row-fluid">
     <div class="span12 well">
       <h3>Add Attendee</h3>
@@ -15,6 +15,14 @@
           </div>
           <div class="span2">
             <%= button_tag 'Add', :type => 'submit', :class => 'btn btn-primary' %>
+          </div>
+        </div>
+         <div class="row-fluid">
+          <div class="span2">
+            <%= label_tag 'name', 'Name' %>
+          </div>
+          <div class="span4">
+            <%= autocomplete_field_tag 'attendee[name]', '', autocomplete_member_first_name_events_path, :id_element => '#attendee_gtid', :update_elements => {:gtid => '#attendee_gtid'} %>
           </div>
         </div>
       <% end %>
