@@ -17,6 +17,10 @@
 
     </div>
   </div>
+<% else %>
+  <div class="well">
+    <h4>Please <%= link_to "Log In", home_login_with_CAS_path %> to register for the event.</h4>
+  </div>
 <% end %>
 
 <!-- Display registered and present members for registerable events -->
